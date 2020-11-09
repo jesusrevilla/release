@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function(){
+            let counter = 0;
+            const labels = document.querySelectorAll(".label");
+
+            document.querySelector("#enter").addEventListener("onclick", function(){
+                labels[counter].innerHTML = document.querySelector("#in_serial").value;
+                counter++;
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            SIIX leer etiquetas
+        </div>
+        <div class="middle">
+            <div class="left">
+                <form action="" method="post">
+                    <label for="serial" id="lbl_serial">Lee etiquetas</label>
+                    <input type="text" id="in_serial" name="serial" placeholder="Serial" autofocus>
+                    <input type="button" value="Leer" id="enter">
+                </form>
+            </div>
+            <div class="workbench">
+                <div class="row">
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                    <div class="column">
+                        <div class="label"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+</html>
