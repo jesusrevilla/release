@@ -29,6 +29,21 @@
                 if (pcb_set.has(serial)){
                     document.querySelector(".footer").innerHTML = "PCB escaneada antes";
                 } else {
+                    fetch('http://192.168.3.27/apps/query_item/33611%20C%20XA%20200098488',{
+                        method: 'GET',
+                        mode: 'cors',
+                        headers : {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        document.querySelector(".footer").innerHTML = response;
+                        console.log(response);
+                    })
+                    .catch(error =>{
+                        document.querySelector(".footer").innerHTML = response;
+                        console.log(error);
+                    })
                     pcb_set.add(serial);
                     labels[counter].innerHTML = serial;
                     counter++;
