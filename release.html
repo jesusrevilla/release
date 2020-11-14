@@ -7,15 +7,49 @@
     <link rel="stylesheet" href="style.css">
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function(){
-            let counter = 0;
-            const labels = document.querySelectorAll(".label");
 
-            document.querySelector("#enter").addEventListener("onclick", function(){
-                labels[counter].innerHTML = document.querySelector("#in_serial").value;
-                counter++;
-            });
+            let counter = 0;
+            const pcb_set = new Set();
+            document.querySelector("button").disabled = true;
+
+            document.querySelector("#in_serial").onkeyup = function(){
+                if (document.querySelector("#in_serial").value.length > 0){
+                    document.querySelector("button").disabled = false;
+                } else {
+                    document.querySelector("button").disabled = true;
+                }
+            }
+
+            document.querySelector("button").onclick = function(){
+                labels = document.querySelectorAll(".label");
+                serial = document.querySelector("#in_serial").value;
+
+                // Validate to avoid duplicated labels
+                if (pcb_set.has(serial)){
+                    document.querySelector(".footer").innerHTML = "PCB escaneada antes";
+                } else {
+                    pcb_set.add(serial);
+                    labels[counter].innerHTML = serial;
+                    counter++;
+                    document.querySelector(".footer").innerHTML = "OK"
+                }
+                // reset counter
+                if (counter >= labels.length){
+                    counter = 0;
+                    pcb_set.clear();
+                }
+                // clear all except first record
+                if (counter === 1){
+                    for (i = 1; i < labels.length; i++){
+                        labels[i].innerHTML = "";
+                    }
+                }
+                
+                document.querySelector("#in_serial").value = "";
+                console.log(pcb_set.size);
+                return false;
+            }
         });
     </script>
 
@@ -27,10 +61,10 @@
         </div>
         <div class="middle">
             <div class="left">
-                <form action="" method="post">
+                <form>
                     <label for="serial" id="lbl_serial">Lee etiquetas</label>
                     <input type="text" id="in_serial" name="serial" placeholder="Serial" autofocus>
-                    <input type="button" value="Leer" id="enter">
+                    <button>Serial</button>  
                 </form>
             </div>
             <div class="workbench">
